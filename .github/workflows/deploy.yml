@@ -5,14 +5,18 @@ on:
       - main
  
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - run: docker build -t j0a0m4/docker-react -f Dockerfile.dev .
       - run: docker run -e CI=true j0a0m4/docker-react npm test
- 
+  
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
  
