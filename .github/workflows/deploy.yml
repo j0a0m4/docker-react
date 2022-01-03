@@ -13,7 +13,7 @@ jobs:
       - run: docker build -t j0a0m4/docker-react -f Dockerfile.dev .
       - run: docker run -e CI=true j0a0m4/docker-react npm test
   
-  package:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
